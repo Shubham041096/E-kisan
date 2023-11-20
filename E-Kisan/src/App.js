@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import Body from "./Components/Body";
 import Cart from "./Components/Cart";
 import Seller from "./Components/Seller";
+import Admin from "./Components/Admin";
 
 function App() {
   // const [mode, setMode] = useState(false);
@@ -64,8 +65,11 @@ function App() {
                 <Products />
               </Body>
             </Route>
+            <Route exact path="/admin">
+              <Admin />
+            </Route>
             <Route exact path="/seller">
-              <Seller/>
+              <Seller />
             </Route>
             <Route exact path="/cart">
               <Body>

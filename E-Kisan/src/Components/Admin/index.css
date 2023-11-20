@@ -1,0 +1,7 @@
+.product-details {
+  display: flex;
+  justify-content: space-evenly;
+}
+.product-details p {
+  font-size: 25px;
+}

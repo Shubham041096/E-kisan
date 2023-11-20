@@ -100,5 +100,7 @@ const store = configureStore({
 });
 
 export const cartActions = cartSlice.actions;
+export const selectCartTotal = (state) =>
+  state.cart.items.reduce((total, item) => total + item.totalPrice, 0);
 // export const authActions = authSlice.actions;
 export default store;
