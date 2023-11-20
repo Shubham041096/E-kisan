@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
+import { selectCartTotal } from "../store";
+
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
-
+  const cartTotal = useSelector(selectCartTotal);
   return (
     <div>
       <h1>

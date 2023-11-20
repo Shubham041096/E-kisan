@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { api } from "../apiServices";
 
 const initialCartState = {
   items: [],
@@ -94,13 +95,15 @@ const cartSlice = createSlice({
 
 const store = configureStore({
   reducer: {
+    [api.reducerPath]: api.reducer,
     cart: cartSlice.reducer,
-    // auth: authSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export const cartActions = cartSlice.actions;
 export const selectCartTotal = (state) =>
   state.cart.items.reduce((total, item) => total + item.totalPrice, 0);
-// export const authActions = authSlice.actions;
+
 export default store;
