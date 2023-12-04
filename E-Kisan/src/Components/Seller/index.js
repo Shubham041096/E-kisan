@@ -14,8 +14,13 @@ function Seller() {
   const [createProduct, { isLoading }] = useCreateProductMutation();
   const { email } = useSelector((state) => state.auth.userInfo);
 
-  const { data = [], isSuccess, refetch } = useGetProductsQuery(email);
-  console.log(data);
+  const {
+    data: products = {},
+    isSuccess,
+    refetch,
+  } = useGetProductsQuery(email);
+
+  // Object.keys(data).map((product) => console.log(product));
 
   const createProductHandler = async (e) => {
     e.preventDefault();
@@ -27,10 +32,11 @@ function Seller() {
         quantity,
         email,
       }).unwrap();
-      refetch();
+
       if (productData) {
         alert("Product added");
       }
+      refetch();
     } catch (error) {
       console.log(error);
     }
@@ -112,16 +118,14 @@ function Seller() {
                 <p>Quantity</p>
               </div>
               {isSuccess ? (
-                data.map((product) =>
-                  product.isActive === 1 ? (
-                    <div className="product-list" key={product.prodId}>
-                      <p>{product.prodName}</p>
-                      <p>{product.price}</p>
-                      <p>{product.quantity}</p>
-                    </div>
-                  ) : (
-                    <p>No data</p>
-                  )
+                products.isActive === 1 ? (
+                  <div className="product-list" key={products.prodId}>
+                    <p>{products.prodName}</p>
+                    <p>{products.price}</p>
+                    <p>{products.quantity}</p>
+                  </div>
+                ) : (
+                  <p>No data</p>
                 )
               ) : (
                 <p>None</p>
@@ -137,16 +141,14 @@ function Seller() {
                 <p>Quantity</p>
               </div>
               {isSuccess ? (
-                data.map((product) =>
-                  product.isActive === 0 ? (
-                    <div className="product-list" key={product.prodId}>
-                      <p>{product.prodName}</p>
-                      <p>{product.price}</p>
-                      <p>{product.quantity}</p>
-                    </div>
-                  ) : (
-                    <p>No data</p>
-                  )
+                products.isActive === 0 ? (
+                  <div className="product-list" key={products.prodId}>
+                    <p>{products.prodName}</p>
+                    <p>{products.price}</p>
+                    <p>{products.quantity}</p>
+                  </div>
+                ) : (
+                  <p>No data</p>
                 )
               ) : (
                 <p>None</p>
@@ -164,16 +166,14 @@ function Seller() {
                 <p>Quantity</p>
               </div>
               {isSuccess ? (
-                data.map((product) =>
-                  product.isActive === 2 ? (
-                    <div className="product-list" key={product.prodId}>
-                      <p>{product.prodName}</p>
-                      <p>{product.price}</p>
-                      <p>{product.quantity}</p>
-                    </div>
-                  ) : (
-                    <p>No data</p>
-                  )
+                products.isActive === 2 ? (
+                  <div className="product-list" key={products.prodId}>
+                    <p>{products.prodName}</p>
+                    <p>{products.price}</p>
+                    <p>{products.quantity}</p>
+                  </div>
+                ) : (
+                  <p>No data</p>
                 )
               ) : (
                 <p>None</p>
