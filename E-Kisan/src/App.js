@@ -1,83 +1,45 @@
-//import logo from './logo.svg';
-//import fruits from './Images/fruits'
 import React from "react";
 import "./App.css";
-import Navbar from "./Components/Navbar";
 import Registration from "./Components/Registration";
-import { useState } from "react";
 import Aboutus from "./Components/Aboutus";
-import Contactus from "./Components/Contactus";
 import Loginpage from "./Components/Loginpage";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Payment from "./Components/Payment";
 import Thankyou from "./Components/Thankyou";
 import Dashboard from "./Components/Dashboard";
 import Products from "./Components/Products";
-import { useSelector } from "react-redux";
-import Body from "./Components/Body";
 import Cart from "./Components/Cart";
 import Seller from "./Components/Seller";
 import Admin from "./Components/Admin";
+import Adminroutes from "./protectedroutes/Adminroutes";
+import Sellerroutes from "./protectedroutes/Sellerroutes";
+import Userroutes from "./protectedroutes/Userroutes";
 
 function App() {
-  // const [mode, setMode] = useState(false);
-  // const toggleMode = () => {
-  //   if (mode === "light") {
-  //     setMode("dark");
-  //     //showAlert("Dark mode has been enabled", "Success");
-  //   } else setMode("light");
-  // };
-
   return (
     <>
       <div className="App">
-        {/* <img src='/src/images/bgimage.jpg'/> */}
+        <Routes>
+          <Route exact path="/" element={<Dashboard />} />
+          <Route exact path="/about" element={<Aboutus />} />
+          <Route exact path="/register" element={<Registration />} />
+          <Route exact path="/login" element={<Loginpage />} />
 
-        {/* <Aboutus/> */}
-        {/* <Loginpage/> */}
-        {/* <Contactus/> */}
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Dashboard />
-            </Route>
-            <Route exact path="/about">
-              <Body>
-                <Aboutus />
-              </Body>
-            </Route>
-            <Route exact path="/register">
-              <Registration />
-            </Route>
-            <Route exact path="/login">
-              <Body>
-                <Loginpage />
-              </Body>
-            </Route>
-            <Route exact path="/payment">
-              <Payment />
-            </Route>
-            <Route exact path="/thankyou">
-              <Thankyou />
-            </Route>
-            <Route exact path="/products">
-              <Body>
-                <Products />
-              </Body>
-            </Route>
-            <Route exact path="/admin">
-              <Admin />
-            </Route>
-            <Route exact path="/seller">
-              <Seller />
-            </Route>
-            <Route exact path="/cart">
-              <Body>
-                <Cart />
-              </Body>
-            </Route>
-          </Switch>
-        </Router>
+          <Route path="" element={<Adminroutes />}>
+            <Route exact path="/admin" element={<Admin />} />
+          </Route>
+
+          <Route path="" element={<Sellerroutes />}>
+            <Route exact path="/seller" element={<Seller />} />
+          </Route>
+
+          <Route path="" element={Userroutes}>
+            <Route exact path="/payment" element={<Payment />} />
+            <Route exact path="/thankyou" element={<Thankyou />} />
+          </Route>
+          <Route exact path="/products" element={<Products />} />
+          <Route exact path="/cart" element={<Cart />} />
+        </Routes>
       </div>
     </>
   );

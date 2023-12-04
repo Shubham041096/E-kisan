@@ -60,7 +60,7 @@ export default function Payment() {
       </div>
       <div className="mx-5"></div>
        <div>
-       <button class="btn btn-primary mx-4 my-4"  type="submit">Pay Now</button>
+       <button className="btn btn-primary mx-4 my-4"  type="submit">Pay Now</button>
        </div>
 
       </form>

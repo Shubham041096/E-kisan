@@ -1,4 +1,11 @@
-label{
-    display: block;
-    text-align: start;
+label {
+  display: block;
+  text-align: start;
+}
+.product-list {
+  display: flex;
+  justify-content: space-around;
+}
+.seller{
+  
 }

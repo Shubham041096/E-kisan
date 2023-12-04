@@ -1,37 +1,31 @@
 import React from "react";
-import { cartActions } from "../store";
 import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../slices/cartSlice";
 
 export default function ProductItem(props) {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  const { title, price, description, id } = props;
+  const { name, price, id } = props;
 
   const addToCartHandler = () => {
-    // and then send Http request
-    // fetch('firebase-url', { method: 'POST', body: JSON.stringify(newCart) })
+    
     dispatch(
-        cartActions.addToCart({
-          id,
-          title,
-          price,
-        })
-      );
+      addToCart({
+        id,
+        name,
+        price,
+      })
+    );
   };
   const removeFromCartHandler = () => {
-    dispatch(cartActions.removeFromCart(id));
+    dispatch(removeFromCart(id));
   };
   return (
     <div className="col md-4 my-4">
       <div className="card" style={{ width: "18rem" }}>
         <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">
-           {description}
-          </p>
-          <p className="card-text">
-           ₹{price}
-          </p>
+          <h5 className="card-title">{name}</h5>
+          <p className="card-text">₹{price}</p>
           <button className="btn btn-primary" onClick={removeFromCartHandler}>
             -
           </button>
@@ -39,10 +33,8 @@ export default function ProductItem(props) {
           <button className="btn btn-primary" onClick={addToCartHandler}>
             +
           </button>
-          {/* <button className="btn btn-primary" >add to cart:{quantity}</button> */}
         </div>
       </div>
-      
     </div>
   );
 }

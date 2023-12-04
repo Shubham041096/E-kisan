@@ -1,19 +1,29 @@
 //shortcut for react function based component -> rfc
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions  } from "../store";
+import { resetCart } from "../slices/cartSlice";
+import { logout } from "../slices/authSlice";
+
 export default function Navbar(props) {
   const dispatch = useDispatch();
-  const quantity = useSelector((state) => state.cart.totalQuantity);
-  const data = typeof window !== "undefined" && localStorage.getItem("cart") ? 
- JSON.parse(localStorage.getItem("cart")) : []
-  console.log(data);
-  const authentication = useSelector((state) => state.cart.isauth);
+  const cart = useSelector((state) => state.cart);
+  const { totalQuantity } = cart;
+
+  const navigate = useNavigate();
+
+  const authentication = useSelector((state) => state.auth);
 
   const logoutHandler = () => {
-    dispatch(cartActions.logout());
+    try {
+      dispatch(resetCart());
+      dispatch(logout());
+
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     //all code of navbar writting here             //to change the theme via toggl switch from app.js
@@ -39,26 +49,32 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
-                Contact us
-              </a>
-            </li>
-            <li className="nav-item">
               <a className="nav-link mx-3" href="/about">
                 {props.about}
               </a>
             </li>
-            {authentication && (
+            {authentication.userInfo !== null ? (
               <>
-                <Link to='/cart' class="btn btn-primary ms-2">
-                  Add to card: {quantity}
-                </Link>
+                {authentication.userInfo.roleName === "ROLE_BUYER" ? (
+                  <Link to="/cart" className="btn btn-primary ms-2">
+                    Cart: {totalQuantity}
+                  </Link>
+                ) : (
+                  ""
+                )}
+
                 <Link
                   to="/login"
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   onClick={logoutHandler}
                 >
                   Log out
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/cart" className="btn btn-primary ms-2">
+                  Cart: {totalQuantity}
                 </Link>
               </>
             )}
