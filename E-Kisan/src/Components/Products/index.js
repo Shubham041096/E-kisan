@@ -14,15 +14,19 @@ export default function Products() {
           </div>
           {isLoading && <span>Loading</span>}
           {isSuccess &&
-            data.map((product) => (
-              <ProductItem
-                key={product.prodId}
-                id={product.prodId}
-                name={product.prodName}
-                price={product.price}
-                description={product.description}
-              />
-            ))}
+            data.map((product) =>
+              product.isActive === 1 ? (
+                <ProductItem
+                  key={product.prodId}
+                  id={product.prodId}
+                  name={product.prodName}
+                  price={product.price}
+                  description={product.description}
+                />
+              ) : (
+                <p key={Math.floor(Math.random() * 1000) + 1}>No Products</p>
+              )
+            )}
         </div>
       </div>
     </Body>

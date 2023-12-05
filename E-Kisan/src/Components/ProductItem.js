@@ -5,10 +5,9 @@ import { addToCart, removeFromCart } from "../slices/cartSlice";
 export default function ProductItem(props) {
   const dispatch = useDispatch();
 
-  const { name, price, id } = props;
+  const { name, price, id, key } = props;
 
   const addToCartHandler = () => {
-    
     dispatch(
       addToCart({
         id,
@@ -21,7 +20,7 @@ export default function ProductItem(props) {
     dispatch(removeFromCart(id));
   };
   return (
-    <div className="col md-4 my-4">
+    <div key={key} className="col md-4 my-4">
       <div className="card" style={{ width: "18rem" }}>
         <div className="card-body">
           <h5 className="card-title">{name}</h5>

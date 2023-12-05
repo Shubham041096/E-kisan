@@ -3,13 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   return (
-    <div
-      style={{
-        backgroundImage: "url('./image/acc.png')",
-        height: "100%",
-        width: "100%",
-      }}
-    >
+    <div>
       <div className="row">
         <div
           id="carouselExampleControls"
@@ -84,7 +78,7 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
-      
+
       <div className="container my-4">
         <div className="row my-5">
           <div className="col-md-6" style={{ textAlign: "left" }}>
