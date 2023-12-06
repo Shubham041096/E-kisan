@@ -23,9 +23,7 @@ export default function Products() {
                   price={product.price}
                   description={product.description}
                 />
-              ) : (
-                <p key={Math.floor(Math.random() * 1000) + 1}>No Products</p>
-              )
+              ) : null
             )}
         </div>
       </div>
