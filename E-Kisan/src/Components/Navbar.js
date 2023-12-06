@@ -9,7 +9,7 @@ import { logout } from "../slices/authSlice";
 export default function Navbar(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const { totalQuantity } = cart;
+ 
 
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ export default function Navbar(props) {
               <>
                 {authentication.userInfo.roleName === "ROLE_BUYER" ? (
                   <Link to="/cart" className="btn btn-primary ms-2">
-                    Cart: {totalQuantity}
+                    Cart: {cart.totalQuantity}
                   </Link>
                 ) : (
                   ""
@@ -74,7 +74,7 @@ export default function Navbar(props) {
             ) : (
               <>
                 <Link to="/cart" className="btn btn-primary ms-2">
-                  Cart: {totalQuantity}
+                  Cart: {cart.totalQuantity}
                 </Link>
               </>
             )}

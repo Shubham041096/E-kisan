@@ -63,6 +63,7 @@ export const api = createApi({
       query: (email) => ({
         url: `products/getProduct/${email}`,
       }),
+      providesTags: ["Products"],
     }),
     getAllProducts: builder.query({
       query: () => ({

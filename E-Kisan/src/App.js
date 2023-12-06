@@ -24,7 +24,8 @@ function App() {
           <Route exact path="/about" element={<Aboutus />} />
           <Route exact path="/register" element={<Registration />} />
           <Route exact path="/login" element={<Loginpage />} />
-
+          <Route path="/thank-you" element={<Thankyou />} />
+          
           <Route path="" element={<Adminroutes />}>
             <Route exact path="/admin" element={<Admin />} />
           </Route>
