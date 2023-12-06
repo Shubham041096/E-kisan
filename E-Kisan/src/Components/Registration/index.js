@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../services/apiServices";
+import { useSelector } from "react-redux";
 
 export default function Registration() {
   const [firstName, setFirstName] = useState("");
@@ -13,6 +14,7 @@ export default function Registration() {
 
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
 
   const handleSelectChange = (event) => {
     setRole(event.target.value);
@@ -46,7 +48,19 @@ export default function Registration() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (userInfo) {
+      if (userInfo.roleName === "ROLE_SELLER") {
+        navigate("/seller");
+      }
+      if (userInfo.roleName === "ROLE_BUYER") {
+        navigate("/products");
+      }
+      if (userInfo.roleName === "ROLE_ADMIN") {
+        navigate("/admin");
+      }
+    }
+  }, [userInfo, navigate]);
 
   return (
     <>
