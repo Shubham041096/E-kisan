@@ -16,10 +16,6 @@ function Seller() {
 
   const { data, isSuccess, refetch } = useGetProductsQuery(email);
 
-  console.log(data);
-
-  // Object.keys(data).map((product) => console.log(product));
-
   const createProductHandler = async (e) => {
     e.preventDefault();
 
