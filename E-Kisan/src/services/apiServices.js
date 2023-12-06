@@ -76,6 +76,7 @@ export const api = createApi({
         method: "PUT",
         responseHandler: (response) => response.text(),
       }),
+      invalidatesTags: ["Products"],
     }),
     fulfilled: (result) => {
       return result;
