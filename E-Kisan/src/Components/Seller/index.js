@@ -15,7 +15,6 @@ function Seller() {
   const { email } = useSelector((state) => state.auth.userInfo);
 
   const { data, isSuccess, refetch } = useGetProductsQuery(email);
-  
 
   const createProductHandler = async (e) => {
     e.preventDefault();
@@ -30,6 +29,9 @@ function Seller() {
 
       if (productData) {
         alert("Product added");
+        setprice("");
+        setprodName("");
+        setquantity("");
       }
       refetch();
     } catch (error) {
